@@ -1,0 +1,14 @@
+# ignore ALL log files
+*.log
+
+# ignore ALL object files
+*.o
+
+# ignore ALL input files
+**/input/
+
+# ignore main file
+main
+
+# ignore vscode file
+*.json
