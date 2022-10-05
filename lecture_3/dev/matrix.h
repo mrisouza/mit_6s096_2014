@@ -4,9 +4,9 @@
 
 typedef struct Matrix_s {
     size_t r, c;
-    int index[MAXN][MAXN];
+    int* index;
 } Matrix;
 
-void read_matrix(FILE* pfile, Matrix* matrix);
-void print_matrix(Matrix* matrix);
-void matrix_mult(Matrix* m, Matrix* n, Matrix *p);
+void read_matrix(FILE* pfile, Matrix* m);
+void free_chunk(Matrix* m);
+void print_matrix(Matrix* m);

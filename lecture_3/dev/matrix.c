@@ -3,37 +3,28 @@
 
 #include "matrix.h"
 
-void read_matrix(FILE* pfile, Matrix* matrix){
-    fscanf(pfile, "%zu %zu", &matrix->r, &matrix->c);
-    for(size_t i = 0; i < matrix->r; i++){
-        for(size_t j = 0; j < matrix->c; j++){
-            fscanf(pfile, "%d", &matrix->index[i][j]);
-        }
+void read_matrix(FILE* pfile, Matrix* m){
+    fscanf(pfile, "%zu %zu", &m->c, &m->r);
+    /* now I have to allocate memory for that */
+    size_t chunk = m->c * m->r;
+    m->index = malloc(chunk * sizeof(size_t));
+    for(size_t i = 0; i < chunk; i++){
+        fscanf(pfile, "%d", &m->index[i]);
     }
 }
 
-void print_matrix(Matrix* matrix){
-    for(size_t i = 0; i < matrix->r; i++){
-        for(size_t j = 0; j < matrix->c; j++){
-            printf("%d\t", matrix->index[i][j]);
+void free_chunk(Matrix* m){
+    free(m->index);
+}
+
+void print_matrix(Matrix* m){
+    size_t rows = m->r;
+    size_t columns = m->c;
+
+    for(size_t i = 0; i < columns; i++){
+        for(size_t j = 0; j < rows; j++){
+            printf("%d\t", m->index[i * rows + j]);
         }
         printf("\n");
-    }
-}
-
-void matrix_mult(Matrix* m, Matrix* n, Matrix *p){
-    if(m->c != n->r){
-        printf("The matrices are not dimmensionally compatible...\n");
-        exit(EXIT_FAILURE);
-    }
-    p->r = m->r;
-    p->c = n->c;
-    for(size_t i = 0; i < p->r; i++){
-        for(size_t j = 0; j < p->c; j++){
-            p->index[i][j] = 0;
-            for(size_t k = 0; k < p->r; k++){
-                p->index[i][j] += m->index[i][k] * n->index[k][j];
-            }
-        }
     }
 }
