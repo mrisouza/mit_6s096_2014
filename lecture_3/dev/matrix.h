@@ -10,3 +10,4 @@ typedef struct Matrix_s {
 void read_matrix(FILE* pfile, Matrix* m);
 void free_chunk(Matrix* m);
 void print_matrix(Matrix* m);
+void matrix_mult(Matrix* m, Matrix* n, Matrix* p);
