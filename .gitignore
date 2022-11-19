@@ -5,7 +5,7 @@
 *.o
 
 # ignore ALL input files
-**/input/
+# **/input/
 
 # ignore main file
 main
